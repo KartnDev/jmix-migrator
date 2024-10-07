@@ -1,0 +1,38 @@
+[ui-java-controller-annotation]
+type = Annotation
+complexity = Simplest
+strategy = ChangePackageOrClassname
+trigger = HasType
+
+- OUTDATED
+javatype = io.jmix.ui.screen.UiController
+
+- MODERN
+javatype = io.jmix.flowui.view.ViewController
+
+
+
+[ui-java-descriptor-annotation]
+type = Annotation
+complexity = Simplest
+strategy = ChangePackageOrClassname
+trigger = HasType
+
+- OUTDATED
+javatype = io.jmix.ui.screen.UiController
+
+- MODERN
+javatype = io.jmix.flowui.view.ViewDescriptor
+
+
+[ui-java-route-annotation]
+type = Annotation
+complexity = Highest
+strategy =
+trigger = IsScreen // todo
+
+- OUTDATED
+javatype = io.jmix.ui.screen.UiController
+
+- MODERN
+javatype = io.jmix.flowui.view.ViewDescriptor
