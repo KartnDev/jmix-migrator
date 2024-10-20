@@ -1,24 +1,26 @@
 package io.kartondev
 
-import com.github.javaparser.ParseResult
-import com.github.javaparser.ast.CompilationUnit
-import com.github.javaparser.utils.SourceRoot
-import java.nio.file.Path
-
+import spoon.Launcher
+import spoon.reflect.visitor.filter.ReferenceTypeFilter
+import spoon.support.compiler.FileSystemFolder
+import java.io.File
 
 
 fun main() {
+    val launcher = Launcher()
+
+    launcher.addInputResource(FileSystemFolder(File()))
 
 
-    val projectRoot: Path = Path.of("")
-    val roots = arrayOf(
-        "",
-//            "/Users/cherkasov/IdeaProjects/ats-psz/ats-psz-app/src/test/java",
-    )
-    for (root in roots) {
-        val sourceRoot = SourceRoot(projectRoot.resolve(root))
-        val parseResults: MutableList<ParseResult<CompilationUnit>> = sourceRoot.tryToParse()
-        println(parseResults)
+    launcher.buildModel()
+
+
+    val factory = launcher.factory
+
+
+    for (ctClass in factory.Class().all) {
+        if (ctClass.superclass != null && (ctClass.superclass.simpleName == "StandardLookup" || ctClass.superclass.simpleName == "StandardEditor" || ctClass.superclass.simpleName == "StandardDetailView" || ctClass.superclass.simpleName == "StandardScreen")) {
+
+        }
     }
-
 }

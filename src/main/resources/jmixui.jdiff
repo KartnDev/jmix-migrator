@@ -1,14 +1,14 @@
-[ui-java-controller-annotation]
-type = Annotation
-complexity = Simplest
-strategy = ChangePackageOrClassname
-trigger = HasType
+[]
+type =
+complexity =
+strategy =
+trigger =
 
 - OUTDATED
-javatype = io.jmix.ui.screen.UiController
+javatype =
 
 - MODERN
-javatype = io.jmix.flowui.view.ViewController
+ =
 
 
 

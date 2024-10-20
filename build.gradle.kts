@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     implementation("com.github.javaparser:javaparser-core:3.26.2")
+    implementation("fr.inria.gforge.spoon:spoon-core:10.4.1")
 
     testImplementation(kotlin("test"))
 }

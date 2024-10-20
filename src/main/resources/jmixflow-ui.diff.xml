@@ -1,0 +1,17 @@
+<root-diff>
+    <diff-rule name="ui-java-controller-annotation">
+        <trigget type="Annotation"
+                 on="HasType"/>
+        <complexity value="Simplest"/>
+        <strategy value="ChangePackageOrClassname"/>
+
+        <outdated>
+            <expression javatype="io.jmix.ui.screen.UiController"/>
+        </outdated>
+
+        <modern>
+            <expression javatype="io.jmix.flowui.view.ViewController"/>
+        </modern>
+
+    </diff-rule>
+</root-diff>
