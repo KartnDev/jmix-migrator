@@ -25,14 +25,39 @@ javatype = io.jmix.ui.screen.UiController
 javatype = io.jmix.flowui.view.ViewDescriptor
 
 
+
 [ui-java-route-annotation]
 type = Annotation
 complexity = Highest
-strategy =
-trigger = IsScreen // todo
+strategy = ChangePackageOrClassname,ByCasesStrategy
+trigger = HasType
 
 - OUTDATED
-javatype = io.jmix.ui.screen.UiController
+javatype = io.jmix.ui.navigation.Route
 
 - MODERN
-javatype = io.jmix.flowui.view.ViewDescriptor
+javatype = com.vaadin.flow.router.Route
+
+- CASES:
+1. [root-screen] ## todo maybe relocate to delegates
+    Match:
+        1. method = root, value = true, type = java.lang.Boolean
+        2. method = path, value = *, type = java.lang.String
+    Change:
+        1. method = path, value = "", type = java.lang.String
+    Chain:
+        1. [root-screen-class-inheritance]
+1. [root-screen]
+
+
+[ui-java-route-annotation]::[root-screen-class-inheritance]
+target = Class
+complexity = Middle
+strategy = InheritanceCheckChange
+trigger = DelegatedByParent
+
+- OUTDATED
+implements = Window.HasWorkArea OR None
+
+- MODERN
+extends StandardMainView

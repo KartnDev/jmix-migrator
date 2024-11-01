@@ -1,6 +1,9 @@
 package io.kartondev
 
+import io.kartondev.strategy.MigrationStrategy
+import io.kartondev.strategy.Screen2ViewMigrationStrategy
 import spoon.Launcher
+import spoon.reflect.declaration.CtType
 import spoon.reflect.visitor.filter.ReferenceTypeFilter
 import spoon.support.compiler.FileSystemFolder
 import java.io.File
@@ -9,7 +12,7 @@ import java.io.File
 fun main() {
     val launcher = Launcher()
 
-    launcher.addInputResource(FileSystemFolder(File()))
+    launcher.addInputResource(FileSystemFolder(File("/Users/asd/asd/asd/asd/src/main/java")))
 
 
     launcher.buildModel()
@@ -17,10 +20,13 @@ fun main() {
 
     val factory = launcher.factory
 
+    val strategies = arrayOf(Screen2ViewMigrationStrategy(), Screen2ViewMigrationStrategy())
 
-    for (ctClass in factory.Class().all) {
-        if (ctClass.superclass != null && (ctClass.superclass.simpleName == "StandardLookup" || ctClass.superclass.simpleName == "StandardEditor" || ctClass.superclass.simpleName == "StandardDetailView" || ctClass.superclass.simpleName == "StandardScreen")) {
-
+    for (ctClass: CtType<*>? in factory.Class().all) {
+        for (strategy in strategies) {
+            if(strategy.isSupport(ctClass!!)) {
+                strategy.migrate(ctClass)
+            }
         }
     }
 }
