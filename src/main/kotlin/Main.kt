@@ -12,7 +12,7 @@ import java.io.File
 fun main() {
     val launcher = Launcher()
 
-    launcher.addInputResource(FileSystemFolder(File("/Users/asd/asd/asd/asd/src/main/java")))
+    launcher.addInputResource(FileSystemFolder(File("/Users/cherkasov/IdeaProjects/ats-psz/ats-psz-app/src/main/java")))
 
 
     launcher.buildModel()
