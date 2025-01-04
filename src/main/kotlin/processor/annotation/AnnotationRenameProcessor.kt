@@ -1,4 +1,4 @@
-package io.kartondev.processor.rename
+package io.kartondev.processor.annotation
 
 import io.kartondev.processor.RefactorProcessor
 import spoon.reflect.code.CtExpression
@@ -8,6 +8,7 @@ import utils.toRefactoredFlowUiControllerName
 
 class AnnotationRenameProcessor<A: Annotation> : RefactorProcessor<CtAnnotation<out A>, String> {
 
+    @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun process(unit: CtType<*>, targetAnnotation: CtAnnotation<out A>, contextNewAnnotationName: String) {
         val factory = targetAnnotation.factory
 
