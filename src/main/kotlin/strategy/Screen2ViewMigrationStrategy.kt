@@ -21,7 +21,8 @@ class Screen2ViewMigrationStrategy : MigrationStrategy {
                 (type.superclass.simpleName == "StandardLookup" ||
                         type.superclass.simpleName == "StandardEditor" ||
                         type.superclass.simpleName == "StandardDetailView" ||
-                        type.superclass.simpleName == "StandardScreen")
+                        type.superclass.simpleName == "StandardScreen" ||
+                        type.superclass.simpleName == "Screen")
     }
 
     override fun migrate(type: CtType<*>) {

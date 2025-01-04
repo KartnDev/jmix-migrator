@@ -11,6 +11,6 @@ class UiController2ViewControllerRefactor : JavaRefactor {
 
     override fun makeRefactorOnTarget(type: CtType<*>) {
         val uiController = type.annotations.filter { it.name.equals("UiController") }.get(index = 0)
-        AnnotationRenameProcessor<Annotation>().process(type, uiController, "ViewController")
+        AnnotationRenameProcessor<Annotation>().process(type, uiController, "io.jmix.flowui.view.ViewController")
     }
 }

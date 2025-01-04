@@ -11,6 +11,6 @@ class UiDescriptor2ViewDescriptorRefactor : JavaRefactor {
 
     override fun makeRefactorOnTarget(type: CtType<*>) {
         val uiDescriptor = type.annotations.filter { it.name.equals("UiDescriptor") }.get(index = 0)
-        AnnotationRenameProcessor<Annotation>().process(type, uiDescriptor, "ViewDescriptor")
+        AnnotationRenameProcessor<Annotation>().process(type, uiDescriptor, "io.jmix.flowui.view.ViewDescriptor")
     }
 }

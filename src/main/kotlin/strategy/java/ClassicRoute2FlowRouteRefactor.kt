@@ -15,8 +15,8 @@ class ClassicRoute2FlowRouteRefactor : JavaRefactor {
     override fun makeRefactorOnTarget(type: CtType<*>) {
         val annotation = type.annotations.filter { it.name.equals("Route") }.get(index = 0)
         if(annotation.isRootRoute()) {
-            removeParameterFromAnnotation(annotation, "root")
-            removeParameterFromAnnotation(annotation, "path")
+//            removeParameterFromAnnotation(annotation, "root")
+//            removeParameterFromAnnotation(annotation, "path")
             setAnnotationParameter(annotation, "value", "\"\"")
         }
     }
@@ -27,7 +27,7 @@ class ClassicRoute2FlowRouteRefactor : JavaRefactor {
         parameterName: String,
         parameterValue: String
     ) {
-        annotation.addValue<CtAnnotation<T>>("value", parameterValue)
+        annotation.setValues<CtAnnotation<T>>(mapOf(parameterName to annotation.factory.createCodeSnippetExpression<String>("\"\"")))
     }
 
     private fun removeParameterFromAnnotation(annotation: CtAnnotation<out Annotation>, parameterName: String) {
