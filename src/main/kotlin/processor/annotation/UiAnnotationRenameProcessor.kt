@@ -6,7 +6,7 @@ import spoon.reflect.declaration.*
 import spoon.support.reflect.code.CtLiteralImpl
 import utils.toRefactoredFlowUiControllerName
 
-class AnnotationRenameProcessor<A: Annotation> : RefactorProcessor<CtAnnotation<out A>, String> {
+class UiAnnotationRenameProcessor<A: Annotation> : RefactorProcessor<CtAnnotation<out A>, String> {
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun process(unit: CtType<*>, targetAnnotation: CtAnnotation<out A>, contextNewAnnotationName: String) {

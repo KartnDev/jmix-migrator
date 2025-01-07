@@ -1,0 +1,50 @@
+package utils.data;
+
+import com.company.jmix15.entity.User;
+import io.jmix.core.Metadata;
+import io.jmix.core.MetadataTools;
+import io.jmix.core.metamodel.model.MetaClass;
+import io.jmix.ui.component.GroupTable;
+import io.jmix.ui.component.Table;
+import io.jmix.ui.navigation.Route;
+import io.jmix.ui.screen.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.Objects;
+
+@UiController("User.browse")
+@UiDescriptor("user-browse.xml")
+@LookupComponent("usersTable")
+@Route("users")
+public class UserBrowse extends StandardLookup<User> {
+    @Autowired
+    private GroupTable<User> usersTable;
+    @Autowired
+    private MetadataTools metadataTools;
+    @Autowired
+    private Metadata metadata;
+
+    @Subscribe
+    public void onBeforeShow(final BeforeShowEvent event) {
+        addColumns(usersTable, User.class, "id");
+        List.of("username", "firstName", "lastName", "email", "timeZoneId", "active")
+                        .forEach(e -> usersTable.removeColumn(usersTable.getColumn(e)));
+        addColumns(usersTable, User.class, "username", "version");
+    }
+
+    public <T> void  removeAllColumns(Table<T> table) {
+        table.getColumns().forEach(table::removeColumn);
+    }
+
+    public <T> void addColumns(Table<T> table, Class<T> cls, String... propertyNames) {
+        MetaClass metaClass = metadata.getClass(cls);
+        for (String propertyName : propertyNames) {
+            addColumn(table, metaClass, propertyName);
+        }
+    }
+
+    public <T> void addColumn(Table<T> table, MetaClass metaClass, String propertyName) {
+        table.addColumn(Objects.requireNonNull(metaClass.getPropertyPath(propertyName)));
+    }
+}

@@ -1,6 +1,8 @@
 package io.kartondev
 
+import io.kartondev.strategy.ClassicASTContext
 import io.kartondev.strategy.Screen2ViewMigrationStrategy
+import io.kartondev.utils.searchMainViewClass
 import org.gradle.tooling.GradleConnector
 import org.gradle.tooling.model.idea.IdeaProject
 import org.gradle.tooling.model.idea.IdeaSingleEntryLibraryDependency
@@ -10,16 +12,19 @@ import spoon.reflect.factory.Factory
 import spoon.support.compiler.FileSystemFolder
 import java.io.File
 
+lateinit var classicASTContextGlobal: ClassicASTContext
 
 fun main() {
-    val projectDir = "C:\\Users\\dmutp\\IdeaProjects\\jmix15"
+
+
+    val projectDir = "/Users/cherkasov/IdeaProjects/jmix15"
 
     val projectLibs = getProjectLibraries(File(projectDir))
 
     val launcher = Launcher()
     launcher.environment.noClasspath = false
 
-    launcher.addInputResource(FileSystemFolder(File("$projectDir\\src\\main\\java")))
+    launcher.addInputResource(FileSystemFolder(File("$projectDir/src/main/java")))
 
     launcher.environment.sourceClasspath = projectLibs.toTypedArray()
 
@@ -27,6 +32,7 @@ fun main() {
 
     val factory: Factory = launcher.factory
 
+    classicASTContextGlobal = ClassicASTContext(searchMainViewClass(factory))
 
     val strategies = arrayOf(Screen2ViewMigrationStrategy())
 
@@ -38,7 +44,7 @@ fun main() {
         }
     }
 
-    launcher.environment.sourceOutputDirectory = File("C:\\Users\\dmutp\\IdeaProjects\\jmix15\\src\\main\\java")
+    launcher.environment.sourceOutputDirectory = File("~/IdeaProjects/jmix15/src/main/java")
     launcher.environment.isAutoImports = true
 
     launcher.prettyprint()

@@ -1,6 +1,6 @@
 package io.kartondev.strategy.java
 
-import io.kartondev.processor.annotation.AnnotationRenameProcessor
+import io.kartondev.processor.annotation.UiAnnotationRenameProcessor
 import spoon.reflect.declaration.CtType
 
 class UiController2ViewControllerRefactor : JavaRefactor {
@@ -11,6 +11,6 @@ class UiController2ViewControllerRefactor : JavaRefactor {
 
     override fun makeRefactorOnTarget(type: CtType<*>) {
         val uiController = type.annotations.filter { it.name.equals("UiController") }.get(index = 0)
-        AnnotationRenameProcessor<Annotation>().process(type, uiController, "io.jmix.flowui.view.ViewController")
+        UiAnnotationRenameProcessor<Annotation>().process(type, uiController, "io.jmix.flowui.view.ViewController")
     }
 }
